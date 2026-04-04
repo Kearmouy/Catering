@@ -171,8 +171,8 @@ export default function EventsNewPage() {
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="space-y-2 min-w-0">
                 <label className="text-sm uppercase tracking-[0.2em] text-gray-500 block">
                   Date
                 </label>
@@ -184,7 +184,7 @@ export default function EventsNewPage() {
                 />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-2 min-w-0">
                 <label className="text-sm uppercase tracking-[0.2em] text-gray-500 block">
                   Time
                 </label>
@@ -258,27 +258,30 @@ export default function EventsNewPage() {
             </div>
           </div>
 
-          <div className="flex justify-between items-center pt-6 max-w">
+          <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center mt-4">
             <button
+              type="button"
               onClick={back}
-              className="bg-white text-[#6E3A1B] border border-[#6E3A1B] px-4 py-2 rounded-lg hover:bg-gray-100"
+              className="bg-white text-[#6E3A1B] border border-[#6E3A1B] px-4 py-3 rounded-lg hover:bg-gray-100 min-h-11 w-full sm:w-auto"
             >
               Back
             </button>
 
-            <div className="flex gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <button
+                type="button"
                 onClick={cancel}
-                className="bg-white text-[#6E3A1B] border border-[#6E3A1B] px-4 py-2 rounded-lg hover:bg-gray-100"
+                className="bg-white text-[#6E3A1B] border border-[#6E3A1B] px-4 py-3 rounded-lg hover:bg-gray-100 min-h-11 w-full sm:w-auto"
               >
                 Cancel
               </button>
 
               <button
+                type="button"
                 onClick={saveEvent}
-                className="bg-[#6E3A1B] text-white px-4 py-2 rounded-lg hover:opacity-90"
+                className="bg-[#6E3A1B] text-white px-4 py-3 rounded-lg hover:opacity-90 min-h-11 w-full sm:w-auto"
               >
-                {isEditing ? "Save Changes" : "Create Event"}
+                {isEditing ? "Save Changes" : "Add Item"}
               </button>
             </div>
           </div>
