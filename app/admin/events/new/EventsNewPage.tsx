@@ -36,6 +36,9 @@ export default function EventsNewPage() {
 
   const isEditing = !!editId;
 
+  const inputClass =
+    "border border-[#d6c8b8] px-3 rounded-xl w-full outline-none focus:border-[#6E3A1B] h-[50px] appearance-none bg-white text-sm sm:text-base";
+
   useEffect(() => {
     const loadMenuItems = async () => {
       try {
@@ -47,22 +50,16 @@ export default function EventsNewPage() {
         console.error(err);
       }
     };
-
     loadMenuItems();
   }, []);
 
   useEffect(() => {
     if (!editId) return;
-
     const loadEvent = async () => {
       try {
         setLoading(true);
         const res = await fetch(`/api/events/${editId}`);
-        if (!res.ok) {
-          alert("Could not load event.");
-          return;
-        }
-
+        if (!res.ok) { alert("Could not load event."); return; }
         const event: EventItem = await res.json();
         setTitle(event.title || "");
         setDate(event.date || "");
@@ -76,7 +73,6 @@ export default function EventsNewPage() {
         setLoading(false);
       }
     };
-
     loadEvent();
   }, [editId]);
 
@@ -88,54 +84,23 @@ export default function EventsNewPage() {
     );
   };
 
-  const back = () => {
-    router.push("/admin/events");
-  };
-
   const cancel = () => {
     if (!title && !date && !time && !location && selectedMenuItems.length === 0) return;
-
     const confirmClear = confirm("Clear all fields?");
     if (!confirmClear) return;
-
-    setTitle("");
-    setDate("");
-    setTime("");
-    setLocation("");
-    setSelectedMenuItems([]);
+    setTitle(""); setDate(""); setTime(""); setLocation(""); setSelectedMenuItems([]);
   };
 
   const saveEvent = async () => {
-    if (!title || !date || !time || !location) {
-      alert("Please fill in all fields.");
-      return;
-    }
-
-    const payload = {
-      title,
-      date,
-      time,
-      location,
-      selectedMenuItems,
-    };
-
+    if (!title || !date || !time || !location) { alert("Please fill in all fields."); return; }
+    const payload = { title, date, time, location, selectedMenuItems };
     try {
-      const res = await fetch(
-        isEditing ? `/api/events/${editId}` : "/api/events",
-        {
-          method: isEditing ? "PUT" : "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      if (!res.ok) {
-        alert("Failed to save event.");
-        return;
-      }
-
+      const res = await fetch(isEditing ? `/api/events/${editId}` : "/api/events", {
+        method: isEditing ? "PUT" : "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) { alert("Failed to save event."); return; }
       router.push("/admin/events");
       router.refresh();
     } catch (err) {
@@ -145,8 +110,8 @@ export default function EventsNewPage() {
   };
 
   return (
-    <main className="p-10">
-      <h1 className="text-3xl font-bold mb-6 text-[#6E3A1B]">
+    <main className="px-4 sm:px-10 py-6 sm:py-10">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-[#6E3A1B]">
         {isEditing ? "Edit Event" : "Events Manager"}
       </h1>
 
@@ -154,43 +119,43 @@ export default function EventsNewPage() {
         <p className="text-gray-500">Loading...</p>
       ) : (
         <>
-          <div className="border p-6 rounded-2xl max-w space-y-6 bg-white">
-            <p className="text-sm uppercase tracking-[0.2em] text-gray-500">
+          <div className="border p-4 sm:p-6 rounded-2xl space-y-5 bg-white">
+            <p className="text-xs sm:text-sm uppercase tracking-[0.2em] text-gray-500">
               Event Details
             </p>
 
             <div className="space-y-2">
-              <label className="text-sm uppercase tracking-[0.2em] text-gray-500 block">
+              <label className="text-xs sm:text-sm uppercase tracking-[0.2em] text-gray-500 block">
                 Event Title
               </label>
               <input
-                className="border border-[#d6c8b8] p-3 rounded-xl w-full outline-none focus:border-[#6E3A1B]"
+                className={inputClass}
                 placeholder="e.g. Henderson Wedding Reception"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-2 min-w-0">
-                <label className="text-sm uppercase tracking-[0.2em] text-gray-500 block">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2 min-w-0 overflow-hidden">
+                <label className="text-xs sm:text-sm uppercase tracking-[0.2em] text-gray-500 block">
                   Date
                 </label>
                 <input
                   type="date"
-                  className="border border-[#d6c8b8] p-3 rounded-xl w-full outline-none focus:border-[#6E3A1B]"
+                  className={inputClass}
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
                 />
               </div>
 
-              <div className="space-y-2 min-w-0">
-                <label className="text-sm uppercase tracking-[0.2em] text-gray-500 block">
+              <div className="space-y-2 min-w-0 overflow-hidden">
+                <label className="text-xs sm:text-sm uppercase tracking-[0.2em] text-gray-500 block">
                   Time
                 </label>
                 <input
                   type="time"
-                  className="border border-[#d6c8b8] p-3 rounded-xl w-full outline-none focus:border-[#6E3A1B]"
+                  className={inputClass}
                   value={time}
                   onChange={(e) => setTime(e.target.value)}
                 />
@@ -198,11 +163,11 @@ export default function EventsNewPage() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm uppercase tracking-[0.2em] text-gray-500 block">
+              <label className="text-xs sm:text-sm uppercase tracking-[0.2em] text-gray-500 block">
                 Location
               </label>
               <input
-                className="border border-[#d6c8b8] p-3 rounded-xl w-full outline-none focus:border-[#6E3A1B]"
+                className={inputClass}
                 placeholder="e.g. Grand Ballroom, Fairmont Hotel"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
@@ -210,23 +175,23 @@ export default function EventsNewPage() {
             </div>
 
             <div className="space-y-3">
-              <label className="text-sm uppercase tracking-[0.2em] text-gray-500 block">
+              <label className="text-xs sm:text-sm uppercase tracking-[0.2em] text-gray-500 block">
                 Menu Items
               </label>
 
               {menuItems.length === 0 ? (
-                <div className="border border-[#d6c8b8] rounded-xl p-4 text-gray-500">
+                <div className="border border-[#d6c8b8] rounded-xl p-4 text-gray-500 text-sm">
                   No menu items available. Create menu items first.
                 </div>
               ) : (
                 <div className="space-y-3">
                   {menuItems.map((item) => {
                     const isSelected = selectedMenuItems.includes(item.name);
-
                     return (
                       <button
                         key={item.id}
                         type="button"
+                        style={{ touchAction: "manipulation" }}
                         onClick={() => toggleMenuItem(item.name)}
                         className={`w-full text-left border rounded-xl p-4 transition ${
                           isSelected
@@ -235,18 +200,19 @@ export default function EventsNewPage() {
                         }`}
                       >
                         <div className="flex justify-between items-start gap-4">
-                          <div>
-                            <h3 className="font-semibold text-[#3b2a22]">{item.name}</h3>
-                            <p className="text-sm text-gray-600 mt-1">{item.description}</p>
+                          <div className="min-w-0 flex-1">
+                            <h3 className="font-semibold text-[#3b2a22] text-sm sm:text-base break-words">
+                              {item.name}
+                            </h3>
+                            <p className="text-sm text-gray-600 mt-1 break-words">
+                              {item.description}
+                            </p>
                           </div>
-
-                          <div
-                            className={`h-5 w-5 rounded border flex items-center justify-center ${
-                              isSelected
-                                ? "bg-[#6E3A1B] border-[#6E3A1B] text-white"
-                                : "border-gray-400 bg-white"
-                            }`}
-                          >
+                          <div className={`h-5 w-5 rounded border flex items-center justify-center shrink-0 ${
+                            isSelected
+                              ? "bg-[#6E3A1B] border-[#6E3A1B] text-white"
+                              : "border-gray-400 bg-white"
+                          }`}>
                             {isSelected ? "✓" : ""}
                           </div>
                         </div>
@@ -258,30 +224,31 @@ export default function EventsNewPage() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-center mt-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:justify-between sm:items-center mt-4">
             <button
               type="button"
-              onClick={back}
+              style={{ touchAction: "manipulation" }}
+              onClick={() => router.push("/admin/events")}
               className="bg-white text-[#6E3A1B] border border-[#6E3A1B] px-4 py-3 rounded-lg hover:bg-gray-100 min-h-11 w-full sm:w-auto"
             >
               Back
             </button>
-
             <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <button
                 type="button"
+                style={{ touchAction: "manipulation" }}
                 onClick={cancel}
                 className="bg-white text-[#6E3A1B] border border-[#6E3A1B] px-4 py-3 rounded-lg hover:bg-gray-100 min-h-11 w-full sm:w-auto"
               >
                 Cancel
               </button>
-
               <button
                 type="button"
+                style={{ touchAction: "manipulation" }}
                 onClick={saveEvent}
                 className="bg-[#6E3A1B] text-white px-4 py-3 rounded-lg hover:opacity-90 min-h-11 w-full sm:w-auto"
               >
-                {isEditing ? "Save Changes" : "Add Item"}
+                {isEditing ? "Save Changes" : "Create Event"}
               </button>
             </div>
           </div>
