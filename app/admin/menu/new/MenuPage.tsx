@@ -151,7 +151,7 @@ export default function MenuPage() {
       {loading ? (
         <p className="text-gray-500">Loading...</p>
       ) : (
-        <div className="mb-6 space-y-6 max-w-4xl">
+        <div className="mb-6 space-y-6 max-w">
           <div className="border p-4 sm:p-6 rounded-2xl space-y-3 bg-white">
             <p className="text-xs sm:text-sm uppercase tracking-[0.2em] text-gray-500">
               Dish Details

@@ -154,7 +154,7 @@ export default function EventsNewPage() {
         <p className="text-gray-500">Loading...</p>
       ) : (
         <>
-          <div className="border p-6 rounded-2xl max-w-2xl space-y-6">
+          <div className="border p-6 rounded-2xl max-w space-y-6 bg-white">
             <p className="text-sm uppercase tracking-[0.2em] text-gray-500">
               Event Details
             </p>
@@ -258,7 +258,7 @@ export default function EventsNewPage() {
             </div>
           </div>
 
-          <div className="flex justify-between items-center pt-6 max-w-2xl">
+          <div className="flex justify-between items-center pt-6 max-w">
             <button
               onClick={back}
               className="bg-white text-[#6E3A1B] border border-[#6E3A1B] px-4 py-2 rounded-lg hover:bg-gray-100"
