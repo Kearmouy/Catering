@@ -31,7 +31,7 @@ export default function EventsListPage() {
 
   return (
     <main className="min-h-screen bg-[#f7f3ee]">
-      <section className="bg-[#6E3A1B] text-white w-full px-4 sm:px-6 py-16 sm:py-20">
+      <section className="bg-[#6E3A1B] text-white px-4 sm:px-6 py-16 sm:py-20">
         <div className="max-w-5xl mx-auto text-center">
           <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase mb-4">Welcome</p>
           <h1 className="text-3xl sm:text-4xl md:text-6xl font-medium leading-tight break-words">
@@ -102,7 +102,7 @@ export default function EventsListPage() {
       </section>
 
       <footer className="border-t border-[#e5d8cb] px-4 sm:px-6 py-6">
-        <div className="max-w-5xl mx-auto text-[10px] sm:text-xs tracking-[0.2em] uppercase text-[#b0a59a]">
+      <div className="px-4 sm:px-6 text-[10px] sm:text-xs tracking-[0.2em] uppercase text-[#b0a59a]">
           <span>Bombay Chowpatty</span>
         </div>
       </footer>

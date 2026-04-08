@@ -21,14 +21,14 @@ export default function AdminNavbar() {
 
   return (
     <nav className="fixed top-0 left-0 w-full bg-white border-b shadow-sm z-50 text-[#6E3A1B]">
-      <div className="w-full px-4 sm:px-6 py-3">
+      <div className="w-full px-4 sm:px-6 py-5">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3 min-w-0">
             <Image
               src="/bombayLogo.png"
               alt="Logo"
-              width={40}
-              height={40}
+              width={60}
+              height={60}
               className="shrink-0 rounded-full object-cover"
             />
             <h1 className="font-bold text-base sm:text-lg leading-tight break-words">
